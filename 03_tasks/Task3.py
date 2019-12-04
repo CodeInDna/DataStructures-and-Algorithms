@@ -64,15 +64,25 @@ def extract_code_from_number(number):
 	else:
 		return None
 
+# def calling_codes_from_bang(calls, caller_code):
+# 	unique_codes = set()
+# 	for call in calls:
+# 		if call[0].startswith(caller_code):
+# 			code = extract_code_from_number(call[1])
+# 			unique_codes.add(code)
+# 	codes = "\n".join(sorted(unique_codes))
+# 	return f"The numbers called by people in Bangalore have codes: \n{codes}"
+
 def calling_codes_from_bang(calls, caller_code):
 	unique_codes = set()
-	for call in calls:
-		if call[0].startswith(caller_code):
-			code = extract_code_from_number(call[1])
-			unique_codes.add(code)
+	banglore_list = list(filter(lambda x:x[0][:5] == '(080)', calls))
+	for call in banglore_list:
+		code = extract_code_from_number(call[1])
+		unique_codes.add(code)
 	codes = "\n".join(sorted(unique_codes))
 	return f"The numbers called by people in Bangalore have codes: \n{codes}"
 
+# another trick
 print(calling_codes_from_bang(calls, '(080)'))
 
 # PART A ends here************************************************
