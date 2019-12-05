@@ -38,3 +38,44 @@ print ("Pass" if ('3432 :si edoc esuoh ehT' == string_reverser('The house code i
 # No punctuation
 # No numbers
 # No special characters
+
+# Code
+
+def anagram_checker(str1, str2):
+# Method 1 starts*********************
+    # str1 = sorted(str1.replace(" ","").lower())
+    # str2 = sorted(str2.replace(" ","").lower())
+    # if str1 == str2:
+    # 	return True
+
+    # return False
+# Method 1 ends***********************
+
+# Method 2 starts*********************
+	str1 = str1.lower().replace(" ","")
+	str2 = str2.lower().replace(" ","")
+
+	obj = {}
+
+	for letter in str1:
+		if letter not in obj:
+			obj[letter] = 1
+		else:
+			obj[letter] += 1
+
+	for letter in str2:
+		if letter in obj.keys():
+			if obj[letter] != str2.count(letter):
+				return False
+		else:
+			return False
+	return True
+# Method 2 ends*************************
+    
+
+# Test Cases
+print ("Pass" if not (anagram_checker('water','waiter')) else "Fail")
+print ("Pass" if anagram_checker('Dormitory','Dirty room') else "Fail")
+print ("Pass" if anagram_checker('Slot machines', 'Cash lost in me') else "Fail")
+print ("Pass" if not (anagram_checker('A gentleman','Elegant men')) else "Fail")
+print ("Pass" if anagram_checker('Time and tide wait for no man','Notified madman into water') else "Fail")
