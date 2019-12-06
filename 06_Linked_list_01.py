@@ -8,8 +8,6 @@
 
 # Our goal is to extend the list until it looks like this:
 # 2->1->4->3->5
-
-
 class Node:
 	def __init__(self, value):
 		self.value = value
@@ -54,34 +52,22 @@ traverse_list(node)
 # The function should take a Python list of values as input and return the head of a linked list that has those values
 # There's some test code, and also a solution, below—give it a try for yourself first, but don't hesitate to look over the solution if you get stuck
 def create_linked_list(input_list):
-    # """
-    # Function to create a linked list
-    # @param input_list: a list of integers
-    # @return: head node of the linked list
-    # """
-   	try:
-	    head = Node(input_list.pop(0))
-	    tail = head
+	head = Node(input_list.pop(0))
+	tail = head
+	while len(input_list) > 0:
+		tail.next = Node(input_list.pop(0))
+		tail = tail.next
 
-	    while(len(input_list) > 0):
-	    	tail.next = Node(input_list.pop(0))
-	    	tail = tail.next
-
-	except IndexError:
-		head = None
-
-    return head
-
-    
+	return head
 list0 = create_linked_list([1,2,3,4])
 print(traverse_list(list0))
+# 1
+# 2
+# 3
+# 4
 
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
 
-
+# Using Class and Methods
 class linked_list:
     def __init__(self):
         self.head = None
@@ -99,6 +85,7 @@ class linked_list:
     	try:
 	    	self.head = Node(input_list.pop(0))
 	    	self.tail = self.head
+	    	self.length += 1
 
 	    	while len(input_list) > 0:
 	    		self.tail.next = Node(input_list.pop(0))
@@ -110,6 +97,41 @@ class linked_list:
     	return self.head
 
 
-singly_list = linked_list()
-res_node = singly_list.singly_linked_list([5, 6, 7, 8])
-print(singly_list.traverse_list(res_node))
+node_list = linked_list()
+res_node = node_list.singly_linked_list([5, 6, 7, 8])
+print(node_list.traverse_list(res_node))
+# 5
+# 6
+# 7
+# 8
+print(node_list.length) # 4
+
+
+### Test Code
+def test_function(input_list, head):
+    try:
+        if len(input_list) == 0:
+            if head is not None:
+                print("Fail")
+                return
+        for value in input_list:
+            if head.value != value:
+                print("Fail")
+                return
+            else:
+                head = head.next
+        print("Pass")
+    except Exception as e:
+        print("Fail: "  + e)
+
+input_list = [1, 2, 3, 4, 5, 6]
+head = node_list.singly_linked_list(input_list)
+test_function(input_list, head)
+
+input_list = [1]
+head = node_list.singly_linked_list(input_list)
+test_function(input_list, head)
+
+input_list = []
+head = node_list.singly_linked_list(input_list)
+test_function(input_list, head)
